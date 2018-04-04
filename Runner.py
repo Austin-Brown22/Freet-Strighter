@@ -1,15 +1,15 @@
 import pygame
 import sys
-background = 'stage.jpg'#the file path of the background image||except it understands if in same folder
-win_size = (1500,480)#window size
+background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
+win_size = (1500,480)  # window size
 pygame.init()
-screen = pygame.display.set_mode(win_size,0,32)
+screen = pygame.display.set_mode(win_size, 0, 32)
 pygame.display.set_caption("Freet Strighter")
 
 
-screen.blit(pygame.image.load(background),(0,0))#loading background
+screen.blit(pygame.image.load(background), (0, 0))  # loading background
 
-#create players
+# create players
 player_group = pygame.sprite.Group()
 player_one = pygame.sprite.Sprite()
 player_two = pygame.sprite.Sprite()

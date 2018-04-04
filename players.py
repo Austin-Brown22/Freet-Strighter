@@ -1,15 +1,18 @@
 import pygame
 import sys
+
+
 class Players:
-    image = pygame.image.load('ryu_idle1.jpeg')#temp filename till wess gets his shit together
+    image = pygame.image.load('ryu_idle1.jpeg')  # temp filename till wess gets his shit together
+
     def __init__(self, xinit, yintit, speed):
-        #pygame.sprite.Sprite.__init__(self)
+        # pygame.sprite.Sprite.__init__(self)
         self.rect = self.image.get_rect()
         self.rect.x = xinit
         self.rect.y = yintit
         self.vel = speed
 
-    #change image and update self.rect
+    # change image and update self.rect
     def crouch(self):
         image = pygame.image.load('ryu_crouch.jpeg')
         self.rect = self.image.get_rect()
@@ -17,12 +20,12 @@ class Players:
     def jump(self):
         pass
 
-    def move(self, dir):
-        if dir == 'right':
+    def move(self, direction):
+        if direction == 'right':
             self.x += self.vel
-        elif dir == 'left':
+        elif direction == 'left':
             self.y -= self.vel
-        elif dir == 'down':
+        elif direction == 'down':
             self.crouch()
-        elif dir == 'up':
+        elif direction == 'up':
             self.jump()
