@@ -5,8 +5,7 @@ import sys
 class Players(pygame.sprite.Sprite):
 
     def __init__(self, xinit, yintit, speed, nam):
-        # pygame.sprite.Sprite.__init__(self)
-        self._Sprite__g = []
+        pygame.sprite.Sprite.__init__(self)
         self.name = nam
         self.image = pygame.image.load(self.name + '_idle1.png')
         self.rect = self.image.get_rect()
