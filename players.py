@@ -34,6 +34,3 @@ class Players(pygame.sprite.Sprite):
             self.crouch()
         elif direction == 'up':
             self.jump()
-
-
-

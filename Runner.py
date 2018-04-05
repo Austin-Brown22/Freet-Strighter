@@ -19,11 +19,16 @@ player_two = players.Players(500, 100, 5, 'ken')  # ken
 player_group.add(player_one, player_two)
 
 running = True
+keys = {'w':False,'a':False,'s':False,'d':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,}
 while running:
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
             running = False
-    player_group.update()
+        elif evt.type == pygame.KEYDOWN:
+            if evt.key == pygame.key.K_a:
+                keys['a'] = True
+
+    player_group.draw(screen)
     pygame.display.update()
 pygame.quit()
 sys.exit()
