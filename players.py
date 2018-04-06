@@ -21,6 +21,10 @@ class Players(pygame.sprite.Sprite):
         self.image = pygame.image.load('ryu_crouch.png')
         self.rect = self.image.get_rect()
 
+    def uncrouch(self):
+        self.image = pygame.image.load('ryu_idle1.png')
+        self.rect = self.image.get_rect()
+
     # go through jump animation and du de stuph
     def jump(self):
         pass
@@ -34,3 +38,5 @@ class Players(pygame.sprite.Sprite):
             self.crouch()
         elif direction == 'up':
             self.jump()
+        elif direction == 'undown':
+            self.uncrouch()
