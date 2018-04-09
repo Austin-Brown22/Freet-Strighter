@@ -1,17 +1,18 @@
 import pygame
 import sys
 
-
+#C:\Users\b0503447\PycharmProjects\Freet-Strighter\ken Sprites\ken_idle1.png
 class Players(pygame.sprite.Sprite):
 
-    def __init__(self, xinit, yintit, speed, nam):
+    def __init__(self, xinit, yintit, speed, nam,number):
         pygame.sprite.Sprite.__init__(self)
         self.name = nam
-        self.image = pygame.image.load(self.name + '_idle1.png')
+        self.image = pygame.image.load(self.name + ' Sprites\\' + self.name + '_idle1.png')
         self.rect = self.image.get_rect()
         self.rect.x = xinit
         self.rect.y = yintit
         self.vel = speed
+        self.player_num = number
 
     def update(self):#need to make this work before i can actually test anything
         pass

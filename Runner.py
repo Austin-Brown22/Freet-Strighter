@@ -15,8 +15,8 @@ screen.blit(pygame.image.load(background), (0, 0))  # loading background
 
 # create players
 player_group = player_group.Player_Group()
-player_one = players.Players(100, 100, 5,'ryu')  # ryu
-player_two = players.Players(500, 100, 5, 'ken')  # ken
+player_one = players.Players(100, 100, 5,'Ryu',1)  # ryu player one
+player_two = players.Players(500, 100, 5, 'Ken',2)  # ken player two
 player_group.add(player_one, player_two)
 
 running = True
@@ -26,62 +26,62 @@ while running:
         if evt.type == pygame.QUIT:
             running = False
         elif evt.type == pygame.KEYDOWN:
-            if evt.key == pygame.key.K_a:
+            if evt.key == pygame.K_a:
                 keys['a'] = True
-            elif evt.key == pygame.key.K_s:
+            elif evt.key == pygame.K_s:
                 keys['s'] = True
-            elif evt.key == pygame.key.K_d:
+            elif evt.key == pygame.K_d:
                 keys['d'] = True
-            elif evt.key == pygame.key.K_w:
+            elif evt.key == pygame.K_w:
                 keys['w'] = True
-            elif evt.key == pygame.key.K_i:
+            elif evt.key == pygame.K_i:
                 keys['i'] = True
-            elif evt.key == pygame.key.K_o:
+            elif evt.key == pygame.K_o:
                 keys['o'] = True
-            elif evt.key == pygame.key.K_p:
+            elif evt.key == pygame.K_p:
                 keys['p'] = True
-            elif evt.key == pygame.key.K_LEFT:
+            elif evt.key == pygame.K_LEFT:
                 keys['left'] = True
-            elif evt.key == pygame.key.K_RIGHT:
+            elif evt.key == pygame.K_RIGHT:
                 keys['right'] = True
-            elif evt.key == pygame.key.K_UP:
+            elif evt.key == pygame.K_UP:
                 keys['up'] = True
-            elif evt.key == pygame.key.K_DOWN:
+            elif evt.key == pygame.K_DOWN:
                 keys['down'] = True
-            elif evt.key == pygame.key.K_KP4:
+            elif evt.key == pygame.K_KP4:
                 keys['4'] = True
-            elif evt.key == pygame.key.K_KP5:
+            elif evt.key == pygame.K_KP5:
                 keys['5'] = True
-            elif evt.key == pygame.key.K_KP6:
+            elif evt.key == pygame.K_KP6:
                 keys['6'] = True
         elif evt.type == pygame.KEYUP:
-            if evt.key == pygame.key.K_a:
+            if evt.key == pygame.K_a:
                 keys['a'] = False
-            elif evt.key == pygame.key.K_s:
+            elif evt.key == pygame.K_s:
                 keys['s'] = False
-            elif evt.key == pygame.key.K_d:
+            elif evt.key == pygame.K_d:
                 keys['d'] = False
-            elif evt.key == pygame.key.K_w:
+            elif evt.key == pygame.K_w:
                 keys['w'] = False
-            elif evt.key == pygame.key.K_i:
+            elif evt.key == pygame.K_i:
                 keys['i'] = False
-            elif evt.key == pygame.key.K_o:
+            elif evt.key == pygame.K_o:
                 keys['o'] = False
-            elif evt.key == pygame.key.K_p:
+            elif evt.key == pygame.K_p:
                 keys['p'] = False
-            elif evt.key == pygame.key.K_LEFT:
+            elif evt.key == pygame.K_LEFT:
                 keys['left'] = False
-            elif evt.key == pygame.key.K_RIGHT:
+            elif evt.key == pygame.K_RIGHT:
                 keys['right'] = False
-            elif evt.key == pygame.key.K_UP:
+            elif evt.key == pygame.K_UP:
                 keys['up'] = False
-            elif evt.key == pygame.key.K_DOWN:
+            elif evt.key == pygame.K_DOWN:
                 keys['down'] = False
-            elif evt.key == pygame.key.K_KP4:
+            elif evt.key == pygame.K_KP4:
                 keys['4'] = False
-            elif evt.key == pygame.key.K_KP5:
+            elif evt.key == pygame.K_KP5:
                 keys['5'] = False
-            elif evt.key == pygame.key.K_KP6:
+            elif evt.key == pygame.K_KP6:
                 keys['6'] = False
     for pressed in keys:
         if keys[pressed]:
