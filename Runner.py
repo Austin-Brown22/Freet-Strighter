@@ -15,8 +15,8 @@ screen.blit(pygame.image.load(background), (0, 0))  # loading background
 
 # create players
 player_group = player_group.Player_Group()
-player_one = players.Players(100, 100, 5,'Ryu',1)  # ryu player one
-player_two = players.Players(500, 100, 5, 'Ken',2)  # ken player two
+player_one = players.Players(700, 200, 10,'ryu',1)  # ryu player one
+player_two = players.Players(400, 200, 10, 'ken',2)  # ken player two
 player_group.add(player_one, player_two)
 
 running = True
@@ -59,6 +59,7 @@ while running:
                 keys['a'] = False
             elif evt.key == pygame.K_s:
                 keys['s'] = False
+                player_group.move('undown')
             elif evt.key == pygame.K_d:
                 keys['d'] = False
             elif evt.key == pygame.K_w:
@@ -77,6 +78,7 @@ while running:
                 keys['up'] = False
             elif evt.key == pygame.K_DOWN:
                 keys['down'] = False
+                player_group.move('undown')
             elif evt.key == pygame.K_KP4:
                 keys['4'] = False
             elif evt.key == pygame.K_KP5:
@@ -87,7 +89,7 @@ while running:
         if keys[pressed]:
             player_group.move(pressed)
 
-
+    screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
     pygame.display.update()
 pygame.quit()

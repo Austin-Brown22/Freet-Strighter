@@ -9,5 +9,5 @@ class Player_Group(pygame.sprite.Group):
         pygame.sprite.Group.__init__(self)
 
     def move(self,direction):
-        if direction == 'w':
-            pass
+        for player in self.sprites():
+            player.move(direction)
