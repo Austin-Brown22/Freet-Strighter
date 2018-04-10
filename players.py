@@ -1,5 +1,4 @@
 import pygame
-import sys
 
 
 class Players(pygame.sprite.Sprite):
@@ -12,11 +11,9 @@ class Players(pygame.sprite.Sprite):
         self.rect.y = yintit
         self.vel = speed
         self.player_num = number
+        self.is_crouched = False
 
-    def update(self):  # need to make this work before i can actually test anything
-        pass
-
-    # change image and update self.rect
+    # change image and update self.rect *PROBLY SHOULDENT CROUCH MID JUMP*
     def crouch(self):
         temp_x = self.rect.x
         temp_y = self.rect.y
@@ -24,6 +21,7 @@ class Players(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = temp_x
         self.rect.y = temp_y
+        self.is_crouched = True
 
     def uncrouch(self):
         temp_x = self.rect.x
@@ -32,23 +30,44 @@ class Players(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = temp_x
         self.rect.y = temp_y
+        self.is_crouched = False
 
     # go through jump animation and du de stuph
     def jump(self):
         pass
 
+    #  have the crouched versions in an if *ALSO HAVE A JUMPING VERSION*
+    #  find a way to disallow movement while an animation is going on
+    #  or don't do ^ because that's a mechanics question that wess should answer
+    def punch(self):
+        pass
+
+    def kick(self):
+        pass
+
+    def haduken(self):
+        pass
+
     def move(self, direction):
         if self.name == 'ken':
             if direction == 'd':
-                self.rect.x += self.vel
+                if not self.is_crouched:
+                    self.rect.x += self.vel
             elif direction == 'a':
-                self.rect.x -= self.vel
+                if not self.is_crouched:
+                    self.rect.x -= self.vel
             elif direction == 's':
                 self.crouch()
             elif direction == 'w':
                 self.jump()
             elif direction == 'undown':
                 self.uncrouch()
+            elif direction == 'i':
+                self.punch()
+            elif direction == 'o':
+                self.kick()
+            elif direction == 'p':
+                self.haduken()
         else:
             if direction == 'right':
                 self.rect.x += self.vel
@@ -60,8 +79,9 @@ class Players(pygame.sprite.Sprite):
                 self.jump()
             elif direction == 'undown':
                 self.uncrouch()
-
-
-    def draw(self):
-        self.rect.x = self.x
-        self.rect.y = self.y
+            elif direction == '4':
+                self.punch()
+            elif direction == '5':
+                self.kick()
+            elif direction == '6':
+                self.haduken()
