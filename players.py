@@ -1,4 +1,5 @@
 import pygame
+import thread_animations
 
 
 class Players(pygame.sprite.Sprite):
@@ -13,6 +14,16 @@ class Players(pygame.sprite.Sprite):
         self.player_num = number
         self.is_crouched = False
         self.health = 100
+        self.threads = []
+        self.in_animation = False
+
+    def update(self, action, num):
+        print('updating to sprite num' + str(num))
+        temp_x = self.rect.x
+        temp_y = self.rect.y
+        self.image = pygame.image.load(self.name + ' Sprites\\' + self.name + '_'+action+str(num)+'.png')
+        self.rect.x = temp_x
+        self.rect.y = temp_y
 
     # change image and update self.rect *PROBLY SHOULDENT CROUCH MID JUMP*
     def crouch(self):
@@ -37,24 +48,6 @@ class Players(pygame.sprite.Sprite):
     def jump(self):
         pass
 
-    #  have the crouched versions in an if *ALSO HAVE A JUMPING VERSION*
-    #  find a way to disallow movement while an animation is going on
-    def punch(self):
-        for i in range(3):
-            temp_x = self.rect.x
-            temp_y = self.rect.y
-            self.image = pygame.image.load(self.name + ' Sprites/' + self.name + '_punch'+ i +'.png')
-            self.rect = self.image.get_rect()
-            self.rect.x = temp_x
-            self.rect.y = temp_y
-
-
-    def kick(self):
-        pass
-
-    def haduken(self):
-        pass
-
     def move(self, direction):
         if self.name == 'ken':
             if direction == 'd':
@@ -72,11 +65,16 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == 'i':
-                self.punch()
+                print('pressed i')
+                if not self.in_animation:
+                    print('calling thread')
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'punch', self, 2))
             elif direction == 'o':
-                self.kick()
+                if not self.in_animation:
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'kick', self, 2))
             elif direction == 'p':
-                self.haduken()
+                if not self.in_animation:
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))
         else:
             if direction == 'right':
                 if not self.is_crouched:
@@ -91,10 +89,13 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == '4':
-                self.punch()
+                if not self.in_animation:
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'punch', self, 2))
             elif direction == '5':
-                self.kick()
+                if not self.in_animation:
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'kick', self, 2))
             elif direction == '6':
-                self.haduken()
+                if not self.in_animation:
+                    self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))
             elif direction == '0':
                 self.jump()
