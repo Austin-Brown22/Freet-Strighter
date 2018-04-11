@@ -11,3 +11,6 @@ class Player_Group(pygame.sprite.Group):
     def move(self,direction):
         for player in self.sprites():
             player.move(direction)
+
+    def update_sprite_frame(self,name,action):
+        pass

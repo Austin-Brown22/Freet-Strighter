@@ -20,7 +20,7 @@ player_two = players.Players(400, 200, 10, 'ken',2)  # ken player two
 player_group.add(player_one, player_two)
 
 running = True
-keys = {'w':False,'a':False,'s':False,'d':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,}
+keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
 while running:
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
@@ -54,6 +54,8 @@ while running:
                 keys['5'] = True
             elif evt.key == pygame.K_KP6:
                 keys['6'] = True
+            elif evt.key == pygame.K_SPACE:
+                keys['space'] = True
         elif evt.type == pygame.KEYUP:
             if evt.key == pygame.K_a:
                 keys['a'] = False
@@ -85,6 +87,8 @@ while running:
                 keys['5'] = False
             elif evt.key == pygame.K_KP6:
                 keys['6'] = False
+            elif evt.key == pygame.K_KP0:
+                keys['0'] = False
     for pressed in keys:
         if keys[pressed]:
             player_group.move(pressed)

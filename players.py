@@ -12,6 +12,7 @@ class Players(pygame.sprite.Sprite):
         self.vel = speed
         self.player_num = number
         self.is_crouched = False
+        self.health = 100
 
     # change image and update self.rect *PROBLY SHOULDENT CROUCH MID JUMP*
     def crouch(self):
@@ -39,7 +40,14 @@ class Players(pygame.sprite.Sprite):
     #  have the crouched versions in an if *ALSO HAVE A JUMPING VERSION*
     #  find a way to disallow movement while an animation is going on
     def punch(self):
-        pass
+        for i in range(3):
+            temp_x = self.rect.x
+            temp_y = self.rect.y
+            self.image = pygame.image.load(self.name + ' Sprites/' + self.name + '_punch'+ i +'.png')
+            self.rect = self.image.get_rect()
+            self.rect.x = temp_x
+            self.rect.y = temp_y
+
 
     def kick(self):
         pass
@@ -58,6 +66,8 @@ class Players(pygame.sprite.Sprite):
             elif direction == 's':
                 self.crouch()
             elif direction == 'w':
+                pass
+            elif direction == 'space':
                 self.jump()
             elif direction == 'undown':
                 self.uncrouch()
@@ -77,7 +87,7 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'down':
                 self.crouch()
             elif direction == 'up':
-                self.jump()
+                pass
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == '4':
@@ -86,3 +96,5 @@ class Players(pygame.sprite.Sprite):
                 self.kick()
             elif direction == '6':
                 self.haduken()
+            elif direction == '0':
+                self.jump()
