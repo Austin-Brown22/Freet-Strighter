@@ -38,7 +38,6 @@ class Players(pygame.sprite.Sprite):
 
     #  have the crouched versions in an if *ALSO HAVE A JUMPING VERSION*
     #  find a way to disallow movement while an animation is going on
-    #  or don't do ^ because that's a mechanics question that wess should answer
     def punch(self):
         pass
 
@@ -70,9 +69,11 @@ class Players(pygame.sprite.Sprite):
                 self.haduken()
         else:
             if direction == 'right':
-                self.rect.x += self.vel
+                if not self.is_crouched:
+                    self.rect.x += self.vel
             elif direction == 'left':
-                self.rect.x -= self.vel
+                if not self.is_crouched:
+                    self.rect.x -= self.vel
             elif direction == 'down':
                 self.crouch()
             elif direction == 'up':
