@@ -11,7 +11,7 @@ class Thread_Animations(threading.Thread):
         self.action = act
         self.player = pler
         self.length = leng
-        self.wait_Time = .1
+        self.wait_Time = .08
 
     def run(self):
         self.player.in_animation = True
