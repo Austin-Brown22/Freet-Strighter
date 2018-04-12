@@ -94,6 +94,10 @@ while running:
             player_group.move(pressed)
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
+
+    for player in player_group.sprites():
+
+
     pygame.display.update()
 pygame.quit()
 sys.exit()
