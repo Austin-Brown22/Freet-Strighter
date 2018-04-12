@@ -92,7 +92,6 @@ while running:
     for pressed in keys:
         if keys[pressed]:
             player_group.move(pressed)
-    print('updating game')
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
     pygame.display.update()
