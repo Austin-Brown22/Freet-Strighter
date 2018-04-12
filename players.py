@@ -52,10 +52,10 @@ class Players(pygame.sprite.Sprite):
     def move(self, direction):
         if self.name == 'ken':
             if direction == 'd':
-                if not self.in_animation:
+                if not (self.in_animation or self.is_crouched):
                     self.rect.x += self.vel
             elif direction == 'a':
-                if not self.in_animation:
+                if not (self.in_animation or self.is_crouched):
                     self.rect.x -= self.vel
             elif direction == 's':
                 self.crouch()
@@ -87,10 +87,10 @@ class Players(pygame.sprite.Sprite):
                     self.threads[-1].start()
         else:
             if direction == 'right':
-                if not self.in_animation:
+                if not (self.in_animation or self.is_crouched):
                     self.rect.x += self.vel
             elif direction == 'left':
-                if not self.in_animation:
+                if not (self.in_animation or self.is_crouched):
                     self.rect.x -= self.vel
             elif direction == 'down':
                 self.crouch()
