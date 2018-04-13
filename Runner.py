@@ -96,7 +96,7 @@ while running:
     player_group.draw(screen)
 
     for player in player_group.sprites():
-
+        pygame.draw.rect(hgdgd)
 
     pygame.display.update()
 pygame.quit()
