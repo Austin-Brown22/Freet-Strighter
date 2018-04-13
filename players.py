@@ -1,5 +1,6 @@
 import pygame
 import thread_animations
+import thread_moving_sprites
 
 
 class Players(pygame.sprite.Sprite):
@@ -47,7 +48,13 @@ class Players(pygame.sprite.Sprite):
 
     # go through jump animation and du de stuph
     def jump(self):
-        pass
+        self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .2))
+        self.threads[-1].start()
+        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)),50,50,1,self))
+        self.threads[-1].start()
+        # do a .join so that the secound move tghread starts after the first move thread
+        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)), 50, -50, 1, self))
+        self.threads[-1].start()
 
     def move(self, direction):
         if self.name == 'ken':
@@ -82,7 +89,7 @@ class Players(pygame.sprite.Sprite):
                         self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'kick', self, 2))
                         self.threads[-1].start()
             elif direction == 'p':
-                if not self.in_animation:
+                if not self.in_animation and not self.is_crouched:
                     self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))
                     self.threads[-1].start()
         else:
@@ -115,7 +122,7 @@ class Players(pygame.sprite.Sprite):
                         self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'kick', self, 2))
                         self.threads[-1].start()
             elif direction == '6':
-                if not self.in_animation:
+                if not self.in_animation and not self.is_crouched:
                     self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))
                     self.threads[-1].start()
             elif direction == '0':
