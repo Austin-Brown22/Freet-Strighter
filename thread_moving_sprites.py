@@ -4,10 +4,16 @@ import time
 
 class thread_Moving_Sprites(threading.Thread):
 
-    def __init__(self, name, dX, dY, period, pler):
+    def __init__(self, name, dX, dY, period, pler, joined=None):
         threading.Thread.__init__(self, target=self.run)
         self.deltaX = dX
         self.deltaY = dY
         self.time = period
         self.name = name
         self.player = pler
+        self.to_join = joined
+
+
+    def run(self):
+        if not self.to_join == None:
+            self.to_join.join()

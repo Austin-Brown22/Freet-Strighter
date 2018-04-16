@@ -5,16 +5,18 @@ import time
 # noinspection PyTypeChecker
 class Thread_Animations(threading.Thread):
 
-    def __init__(self, nam, act, pler, leng, delay=.08):
+    def __init__(self, nam, act, pler, leng, delay=.08, joined=None):
         threading.Thread.__init__(self, target=self.run)
         self.name = nam
         self.action = act
         self.player = pler
         self.length = leng
         self.wait_Time = delay
+        self.to_join = joined
 
     def run(self):
-
+        if not self.to_join == None:
+            self.to_join.join()
         self.player.in_animation = True
         for i in range(1, self.length+1):
             self.player.update(self.action, i)

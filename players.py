@@ -53,7 +53,7 @@ class Players(pygame.sprite.Sprite):
         self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)),50,50,1,self))
         self.threads[-1].start()
         # do a .join so that the secound move tghread starts after the first move thread
-        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)), 50, -50, 1, self))
+        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)), 50, -50, 1, self, self.threads[-1]))
         self.threads[-1].start()
 
     def move(self, direction):
