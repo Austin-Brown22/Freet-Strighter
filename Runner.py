@@ -9,6 +9,9 @@ win_size = (1500,480)  # window size
 pygame.init()
 screen = pygame.display.set_mode(win_size, 0, 32)
 pygame.display.set_caption("Freet Strighter")
+color_red = (217,47,10)
+color_white = (255,255,255)
+d
 
 
 screen.blit(pygame.image.load(background), (0, 0))  # loading background
@@ -95,8 +98,10 @@ while running:
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
 
+
+
     for player in player_group.sprites():
-        pygame.draw.rect(hgdgd)
+        pygame.draw.rect(screen, color_red,(25,25,25,curhealth*3),)
 
     pygame.display.update()
 pygame.quit()
