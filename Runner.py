@@ -11,7 +11,7 @@ screen = pygame.display.set_mode(win_size, 0, 32)
 pygame.display.set_caption("Freet Strighter")
 color_red = (217,47,10)
 color_white = (255,255,255)
-d
+
 
 
 screen.blit(pygame.image.load(background), (0, 0))  # loading background
@@ -21,6 +21,9 @@ player_group = player_group.Player_Group()
 player_one = players.Players(700, 200, 10,'ryu',1)  # ryu player one
 player_two = players.Players(400, 200, 10, 'ken',2)  # ken player two
 player_group.add(player_one, player_two)
+
+percur1 = player_one.current_health * 100/player_one.max_health
+percur2 = player_two.current_health * 100/player_two.max_health
 
 running = True
 keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
@@ -101,8 +104,8 @@ while running:
 
 
     for player in player_group.sprites():
-        pygame.draw.rect(screen, color_red,(25,25,25,curhealth*3),)
-
+        pygame.draw.rect(screen, color_red,(25,25,25,percur1 * 10*3),)
+        pygame.draw.rect(screem,color_red.()
     pygame.display.update()
 pygame.quit()
 sys.exit()
