@@ -21,10 +21,12 @@ class thread_Moving_Sprites(threading.Thread):
             self.to_join.join()
 
         print('start')
+        print(self.name + 'x--' + str(self.player.rect.x) + ' y-- ' + str(self.player.rect.y))
         for i in range(self.period):
-            print(self.player.rect.y)
+            #print(self.player.rect.y)
             self.player.rect.x += self.x_vel
             self.player.rect.y += self.y_vel
-            print(self.player.rect.y)
-            time.sleep(.3)
+            #print(self.player.rect.y)
+            time.sleep(1)
+            print(self.name + 'x--' + str(self.player.rect.x) + ' y-- ' + str(self.player.rect.y))
         print('end')

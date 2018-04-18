@@ -1,6 +1,7 @@
 import pygame
 import thread_animations
 import thread_moving_sprites
+import time
 
 
 class Players(pygame.sprite.Sprite):
@@ -50,11 +51,14 @@ class Players(pygame.sprite.Sprite):
     def jump(self):
         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .2))
         self.threads[-1].start()
-        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)),50,-50,1,self))
-        self.threads[-1].start()
+        print('before x--'+str(self.rect.x)+' y-- '+str(self.rect.y))
+        #self.threads.append(thread_moving_sprites.thread_Moving_Sprites('upthread',50,-50,1,self))
+        #self.threads[-1].start()
         # do a .join so that the secound move tghread starts after the first move thread or dont
-        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('thread' + str(len(self.threads)), 50, 50, 1, self, self.threads[-1]))
+        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('downthread', 50, 50, 1, self,self.threads[-1]))
         self.threads[-1].start()
+        print('after x--' + str(self.rect.x) + ' y-- ' + str(self.rect.y))
+
 
     def move(self, direction):
         if self.name == 'ken':
