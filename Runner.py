@@ -22,8 +22,14 @@ player_one = players.Players(700, 200, 10,'ryu',1)  # ryu player one
 player_two = players.Players(400, 200, 10, 'ken',2)  # ken player two
 player_group.add(player_one, player_two)
 
-percur1 = player_one.current_health * 100/player_one.max_health
-percur2 = player_two.current_health * 100/player_two.max_health
+percur1 = player_one.cur_health * 100/player_one.max_health
+percur2 = player_two.cur_health * 100/player_two.max_health
+
+kenname = pygame.image.load('')
+name_group = pygame.sprite.Group()
+ken_name = pygame.sprite.Sprite(image=ken_name,rect=ken_name.get_rect())
+
+name_group.add(ken_name,ryu_name)
 
 running = True
 keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
@@ -104,8 +110,14 @@ while running:
 
 
     for player in player_group.sprites():
-        pygame.draw.rect(screen, color_red,(25,25,25,percur1 * 10*3),)
-        pygame.draw.rect(screem,color_red.()
+        pygame.draw.rect(screen, color_white, (23, 23, 503, 28), 2)
+        pygame.draw.rect(screen, color_white, (973, 23, 503, 28), 2)
+
+        pygame.draw.rect(screen, color_red,(25,25,percur1 * 5,25))
+        pygame.draw.rect(screen,color_red,(975,25,percur2 * 5,25))
+
+
+
     pygame.display.update()
 pygame.quit()
 sys.exit()
