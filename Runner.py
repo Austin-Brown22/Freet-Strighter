@@ -2,6 +2,7 @@ import pygame
 import sys
 import players
 import player_group
+import name_sprites
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -25,11 +26,13 @@ player_group.add(player_one, player_two)
 percur1 = player_one.cur_health * 100/player_one.max_health
 percur2 = player_two.cur_health * 100/player_two.max_health
 
-kenname = pygame.image.load('')
+ken_ui = pygame.image.load('ui/KenName.png')
+ryu_ui = pygame.image.load('ui/RyuName.png')
 name_group = pygame.sprite.Group()
-ken_name = pygame.sprite.Sprite(image=ken_name,rect=ken_name.get_rect())
+ken_ui = name_sprites.Name_Sprites(50,50,'KenName')
+ryu_ui = name_sprites.Name_Sprites(50,50,'RyuName')
 
-name_group.add(ken_name,ryu_name)
+name_group.add(ken_ui,ryu_ui)
 
 running = True
 keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
