@@ -1,8 +1,8 @@
 import pygame
 import thread_animations
 import thread_moving_sprites
+import jump_thread
 import time
-
 
 class Players(pygame.sprite.Sprite):
     def __init__(self, xinit, yintit, speed, nam, number):
@@ -18,6 +18,7 @@ class Players(pygame.sprite.Sprite):
         self.threads = []
         self.in_animation = False
         self.is_crouched = False
+        self.in_jump = False
 
     def update(self, action, num):
         temp_x = self.rect.x
@@ -51,13 +52,10 @@ class Players(pygame.sprite.Sprite):
     def jump(self):
         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .2))
         self.threads[-1].start()
-        print('before x--'+str(self.rect.x)+' y-- '+str(self.rect.y))
-        #self.threads.append(thread_moving_sprites.thread_Moving_Sprites('upthread',50,-50,1,self))
-        #self.threads[-1].start()
-        # do a .join so that the secound move tghread starts after the first move thread or dont
-        self.threads.append(thread_moving_sprites.thread_Moving_Sprites('downthread', 50, 50, 1, self,self.threads[-1]))
+        self.threads.append(jump_thread.Jump_Thread(self,'right'))
         self.threads[-1].start()
-        print('after x--' + str(self.rect.x) + ' y-- ' + str(self.rect.y))
+
+
 
 
     def move(self, direction):
@@ -73,7 +71,8 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'w':
                 pass
             elif direction == 'space':
-                self.jump()
+                if not self.in_animation and not self.in_jump:
+                    self.jump()
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == 'i':
