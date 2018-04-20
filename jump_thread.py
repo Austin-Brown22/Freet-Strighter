@@ -17,7 +17,11 @@ class Jump_Thread(threading.Thread):
         self.player.in_jump = True
         print('start--'+str(self.player.rect.y))
         if self.direction == 'right':
+            print(self.refreshes)
             for i in range(self.refreshes):
+                while self.player.is_updating:
+                    time.sleep(.005)
+                    pass
                 #self.player.rect.x += 5
                 self.player.rect.y -= self.incrament
                 time.sleep(self.delay)
