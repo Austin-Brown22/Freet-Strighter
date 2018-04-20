@@ -29,8 +29,8 @@ percur2 = player_two.cur_health * 100/player_two.max_health
 ken_ui = pygame.image.load('ui/KenName.png')
 ryu_ui = pygame.image.load('ui/RyuName.png')
 name_group = pygame.sprite.Group()
-ken_ui = name_sprites.Name_Sprites(50,50,'KenName')
-ryu_ui = name_sprites.Name_Sprites(50,50,'RyuName')
+ken_ui = name_sprites.Name_Sprites(550,10 ,'KenName')
+ryu_ui = name_sprites.Name_Sprites(860,10,'RyuName')
 
 name_group.add(ken_ui,ryu_ui)
 
@@ -109,6 +109,7 @@ while running:
             player_group.move(pressed)
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
+    name_group.draw(screen)
 
 
 
