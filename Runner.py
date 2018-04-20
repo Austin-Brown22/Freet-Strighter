@@ -71,6 +71,8 @@ while running:
                 keys['6'] = True
             elif evt.key == pygame.K_SPACE:
                 keys['space'] = True
+            elif evt.key == pygame.K_KP0:
+                keys['0'] = True
         elif evt.type == pygame.KEYUP:
             if evt.key == pygame.K_a:
                 keys['a'] = False
@@ -102,6 +104,8 @@ while running:
                 keys['5'] = False
             elif evt.key == pygame.K_KP6:
                 keys['6'] = False
+            elif evt.key == pygame.K_SPACE:
+                keys['space'] = False
             elif evt.key == pygame.K_KP0:
                 keys['0'] = False
     for pressed in keys:
