@@ -18,6 +18,8 @@ class Players(pygame.sprite.Sprite):
         self.threads = []
         self.in_animation = False
         self.is_crouched = False
+        self.max_health = 50
+        self.cur_health = 50
         self.in_jump = False
         self.is_updating = False
 
