@@ -8,33 +8,44 @@ class Jump_Thread(threading.Thread):
         self.player = pler
         self.direction = direction
         self.delay = .05
-        self.height = 100
+        self.height = 110
         self.refreshes = 10
-        self.incrament = self.height/self.refreshes
+        self.y_incrament = self.height/self.refreshes
+        if self.player.jump_dir == 'None':
+            self.x_dist = 0
+        elif self.player.jump_dir == 'right':
+            self.x_dist = 50
+        elif self.player.jump_dir == 'left':
+            self.x_dist = -50
+        self.x_incrament = self.x_dist/self.refreshes
 
     def run(self):
-        cnt = 0
         self.player.in_jump = True
         print('start--'+str(self.player.rect.y))
         if self.direction == 'right':
+            print(self.refreshes)
             for i in range(self.refreshes):
-                #self.player.rect.x += 5
-                self.player.rect.y -= self.incrament
+                while self.player.is_updating:
+                    time.sleep(.005)
+                self.player.rect.x += self.x_incrament
+                self.player.rect.y -= self.y_incrament
                 time.sleep(self.delay)
                 print(self.player.rect.y)
             for i in range(self.refreshes):
-                #self.player.rect.x += 5
-                self.player.rect.y += self.incrament
+                while self.player.is_updating:
+                    time.sleep(.005)
+                self.player.rect.x += self.x_incrament
+                self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
                 print(self.player.rect.y)
         else:
             for i in range(self.refreshes):
-                #self.player.rect.x -= 5
-                self.player.rect.y -= self.incrament
+                self.player.rect.x -= self.x_incrament
+                self.player.rect.y -= self.y_incrament
                 time.sleep(self.delay)
             for i in range(self.refreshes):
-                #self.player.rect.x -= 5
-                self.player.rect.y += self.incrament
+                self.player.rect.x -= self.x_incrament
+                self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
         self.player.in_jump = False
         print('end--' + str(self.player.rect.y))

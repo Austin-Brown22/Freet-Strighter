@@ -21,14 +21,20 @@ class Players(pygame.sprite.Sprite):
         self.max_health = 50
         self.cur_health = 50
         self.in_jump = False
+        self.is_updating = False
+        self.jump_dir = 'None'
 
 
     def update(self, action, num):
+        print('start update')
+        self.is_updating = True
         temp_x = self.rect.x
         temp_y = self.rect.y
         self.image = pygame.image.load(self.name + ' Sprites\\' + self.name + '_'+action+str(num)+'.png')
         self.rect.x = temp_x
         self.rect.y = temp_y
+        self.is_updating = False
+        print('end update')
 
     # change image and update self.rect *PROBLY SHOULDENT CROUCH MID JUMP*
     def crouch(self):
@@ -53,7 +59,8 @@ class Players(pygame.sprite.Sprite):
 
     # go through jump animation and du de stuph
     def jump(self):
-        self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .2))
+
+        self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .5))
         self.threads[-1].start()
         self.threads.append(jump_thread.Jump_Thread(self,'right'))
         self.threads[-1].start()
@@ -132,4 +139,5 @@ class Players(pygame.sprite.Sprite):
                     self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))
                     self.threads[-1].start()
             elif direction == '0':
-                self.jump()
+                if not self.in_animation and not self.in_jump:
+                    self.jump()

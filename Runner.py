@@ -43,10 +43,12 @@ while running:
         elif evt.type == pygame.KEYDOWN:
             if evt.key == pygame.K_a:
                 keys['a'] = True
+                player_one.jump_dir = 'left'
             elif evt.key == pygame.K_s:
                 keys['s'] = True
             elif evt.key == pygame.K_d:
                 keys['d'] = True
+                player_one.jump_dir = 'right'
             elif evt.key == pygame.K_w:
                 keys['w'] = True
             elif evt.key == pygame.K_i:
@@ -57,8 +59,10 @@ while running:
                 keys['p'] = True
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = True
+                player_two.jump_dir = 'left'
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = True
+                player_two.jump_dir = 'right'
             elif evt.key == pygame.K_UP:
                 keys['up'] = True
             elif evt.key == pygame.K_DOWN:
@@ -76,11 +80,13 @@ while running:
         elif evt.type == pygame.KEYUP:
             if evt.key == pygame.K_a:
                 keys['a'] = False
+                player_one.jump_dir = 'None'
             elif evt.key == pygame.K_s:
                 keys['s'] = False
                 player_group.move('undown')
             elif evt.key == pygame.K_d:
                 keys['d'] = False
+                player_one.jump_dir = 'None'
             elif evt.key == pygame.K_w:
                 keys['w'] = False
             elif evt.key == pygame.K_i:
@@ -91,8 +97,10 @@ while running:
                 keys['p'] = False
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = False
+                player_two.jump_dir = 'None'
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = False
+                player_two.jump_dir = 'None'
             elif evt.key == pygame.K_UP:
                 keys['up'] = False
             elif evt.key == pygame.K_DOWN:
