@@ -22,6 +22,7 @@ class Players(pygame.sprite.Sprite):
         self.cur_health = 50
         self.in_jump = False
 
+
     def update(self, action, num):
         temp_x = self.rect.x
         temp_y = self.rect.y
