@@ -34,6 +34,10 @@ ryu_ui = name_sprites.Name_Sprites(860,10,'RyuName')
 
 name_group.add(ken_ui,ryu_ui)
 
+#create hitsprites
+
+
+
 running = True
 keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
 while running:
@@ -89,6 +93,7 @@ while running:
                 player_two.jump_dir = 'None'
             elif evt.key == pygame.K_w:
                 keys['w'] = False
+                player_two.up_atck = False
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = False
                 player_one.jump_dir = 'None'
@@ -97,6 +102,7 @@ while running:
                 player_one.jump_dir = 'None'
             elif evt.key == pygame.K_UP:
                 keys['up'] = False
+                player_one.up_atck = False
             elif evt.key == pygame.K_DOWN:
                 keys['down'] = False
                 player_group.move('undown')
@@ -116,6 +122,7 @@ while running:
     plr_two_frame = player_two.image_name
     # move and resize the sprite to fit the frame
     # buncha fuggin ifs - or a loop with one set of ifs
+
     # make a mask from hitsprite and opponent sprite
 
     # mask collision with appropriate offsets
