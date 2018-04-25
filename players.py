@@ -26,7 +26,6 @@ class Players(pygame.sprite.Sprite):
 
 
     def update(self, action, num):
-        print('start update')
         self.is_updating = True
         temp_x = self.rect.x
         temp_y = self.rect.y
@@ -34,7 +33,6 @@ class Players(pygame.sprite.Sprite):
         self.rect.x = temp_x
         self.rect.y = temp_y
         self.is_updating = False
-        print('end update')
 
     # change image and update self.rect *PROBLY SHOULDENT CROUCH MID JUMP*
     def crouch(self):

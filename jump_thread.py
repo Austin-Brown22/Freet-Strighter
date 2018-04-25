@@ -14,30 +14,26 @@ class Jump_Thread(threading.Thread):
         if self.player.jump_dir == 'None':
             self.x_dist = 0
         elif self.player.jump_dir == 'right':
-            self.x_dist = 50
+            self.x_dist = 90
         elif self.player.jump_dir == 'left':
-            self.x_dist = -50
+            self.x_dist = -90
         self.x_incrament = self.x_dist/self.refreshes
 
     def run(self):
         self.player.in_jump = True
-        print('start--'+str(self.player.rect.y))
         if self.direction == 'right':
-            print(self.refreshes)
             for i in range(self.refreshes):
                 while self.player.is_updating:
                     time.sleep(.005)
                 self.player.rect.x += self.x_incrament
                 self.player.rect.y -= self.y_incrament
                 time.sleep(self.delay)
-                print(self.player.rect.y)
             for i in range(self.refreshes):
                 while self.player.is_updating:
                     time.sleep(.005)
                 self.player.rect.x += self.x_incrament
                 self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
-                print(self.player.rect.y)
         else:
             for i in range(self.refreshes):
                 self.player.rect.x -= self.x_incrament
@@ -48,4 +44,3 @@ class Jump_Thread(threading.Thread):
                 self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
         self.player.in_jump = False
-        print('end--' + str(self.player.rect.y))

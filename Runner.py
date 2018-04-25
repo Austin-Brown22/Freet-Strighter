@@ -43,36 +43,36 @@ while running:
         elif evt.type == pygame.KEYDOWN:
             if evt.key == pygame.K_a:
                 keys['a'] = True
-                player_one.jump_dir = 'left'
+                player_two.jump_dir = 'left'
             elif evt.key == pygame.K_s:
                 keys['s'] = True
             elif evt.key == pygame.K_d:
                 keys['d'] = True
-                player_one.jump_dir = 'right'
+                player_two.jump_dir = 'right'
             elif evt.key == pygame.K_w:
                 keys['w'] = True
             elif evt.key == pygame.K_i:
-                keys['i'] = True
+                player_group.move('i')
             elif evt.key == pygame.K_o:
-                keys['o'] = True
+                player_group.move('o')
             elif evt.key == pygame.K_p:
-                keys['p'] = True
+                player_group.move('p')
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = True
-                player_two.jump_dir = 'left'
+                player_one.jump_dir = 'left'
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = True
-                player_two.jump_dir = 'right'
+                player_one.jump_dir = 'right'
             elif evt.key == pygame.K_UP:
                 keys['up'] = True
             elif evt.key == pygame.K_DOWN:
                 keys['down'] = True
             elif evt.key == pygame.K_KP4:
-                keys['4'] = True
+                player_group.move('4')
             elif evt.key == pygame.K_KP5:
-                keys['5'] = True
+                player_group.move('5')
             elif evt.key == pygame.K_KP6:
-                keys['6'] = True
+                player_group.move('6')
             elif evt.key == pygame.K_SPACE:
                 keys['space'] = True
             elif evt.key == pygame.K_KP0:
@@ -80,42 +80,34 @@ while running:
         elif evt.type == pygame.KEYUP:
             if evt.key == pygame.K_a:
                 keys['a'] = False
-                player_one.jump_dir = 'None'
+                player_two.jump_dir = 'None'
             elif evt.key == pygame.K_s:
                 keys['s'] = False
                 player_group.move('undown')
             elif evt.key == pygame.K_d:
                 keys['d'] = False
-                player_one.jump_dir = 'None'
+                player_two.jump_dir = 'None'
             elif evt.key == pygame.K_w:
                 keys['w'] = False
-            elif evt.key == pygame.K_i:
-                keys['i'] = False
-            elif evt.key == pygame.K_o:
-                keys['o'] = False
-            elif evt.key == pygame.K_p:
-                keys['p'] = False
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = False
-                player_two.jump_dir = 'None'
+                player_one.jump_dir = 'None'
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = False
-                player_two.jump_dir = 'None'
+                player_one.jump_dir = 'None'
             elif evt.key == pygame.K_UP:
                 keys['up'] = False
             elif evt.key == pygame.K_DOWN:
                 keys['down'] = False
                 player_group.move('undown')
-            elif evt.key == pygame.K_KP4:
-                keys['4'] = False
-            elif evt.key == pygame.K_KP5:
-                keys['5'] = False
-            elif evt.key == pygame.K_KP6:
-                keys['6'] = False
             elif evt.key == pygame.K_SPACE:
                 keys['space'] = False
             elif evt.key == pygame.K_KP0:
                 keys['0'] = False
+
+    #Start MASK SECTION
+
+    #End MASK SECTION
     for pressed in keys:
         if keys[pressed]:
             player_group.move(pressed)
