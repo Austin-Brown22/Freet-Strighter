@@ -34,6 +34,10 @@ ryu_ui = name_sprites.Name_Sprites(860,10,'RyuName')
 
 name_group.add(ken_ui,ryu_ui)
 
+#create hitsprites
+
+
+
 running = True
 keys = {'w':False,'a':False,'s':False,'d':False,'space':False,'i':False,'o':False,'p':False,'left':False,'right':False,'up':False,'down':False,'4':False,'5':False,'6':False,'0':False}
 while running:
@@ -116,6 +120,7 @@ while running:
     plr_two_frame = player_two.image_name
     # move and resize the sprite to fit the frame
     # buncha fuggin ifs - or a loop with one set of ifs
+
     # make a mask from hitsprite and opponent sprite
 
     # mask collision with appropriate offsets
