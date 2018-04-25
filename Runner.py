@@ -112,23 +112,7 @@ while running:
                 keys['0'] = False
 
     #Start MASK SECTION
-
-    #make/update hitbox sprites
-
-    #CHECK If my hitbox collides with yours
-
-    # find out what frame im hitting in
-    plr_one_frame = player_one.image_name
-    plr_two_frame = player_two.image_name
-    # move and resize the sprite to fit the frame
-    # buncha fuggin ifs - or a loop with one set of ifs
-
-    # make a mask from hitsprite and opponent sprite
-
-    # mask collision with appropriate offsets
-
-    # deduct health
-
+    #SPRITES.COLLIDE_MASK()
     #End MASK SECTION
     for pressed in keys:
         if keys[pressed]:
