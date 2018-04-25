@@ -93,6 +93,7 @@ while running:
                 player_two.jump_dir = 'None'
             elif evt.key == pygame.K_w:
                 keys['w'] = False
+                player_two.up_atck = False
             elif evt.key == pygame.K_LEFT:
                 keys['left'] = False
                 player_one.jump_dir = 'None'
@@ -101,6 +102,7 @@ while running:
                 player_one.jump_dir = 'None'
             elif evt.key == pygame.K_UP:
                 keys['up'] = False
+                player_one.up_atck = False
             elif evt.key == pygame.K_DOWN:
                 keys['down'] = False
                 player_group.move('undown')

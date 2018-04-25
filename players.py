@@ -78,7 +78,7 @@ class Players(pygame.sprite.Sprite):
             elif direction == 's':
                 self.crouch()
             elif direction == 'w':
-                pass
+                self.up_atck = True
             elif direction == 'space':
                 if not self.in_animation and not self.in_jump:
                     self.jump()
@@ -120,7 +120,7 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'down':
                 self.crouch()
             elif direction == 'up':
-                pass
+                self.up_atck = True
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == '4':
