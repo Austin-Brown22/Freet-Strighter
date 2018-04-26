@@ -1,0 +1,16 @@
+Ryu
+  punch1       : None
+  punch2       :(10,10,20,5)
+  kick1
+  kick2
+  uppunch1
+  uppunch2
+  uppunch3
+  upkick1
+  upkick2
+  upkick3
+  downpunch1
+  downpunch2
+  downkick1
+  downkick2
+ ken ^again
