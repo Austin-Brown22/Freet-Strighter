@@ -1,5 +1,22 @@
 Ryu
   punch1       : None
+  punch2       : (8,79,71,28)
+  kick1        : None
+  kick2        : (8,127,63,75) 
+  uppunch1     : None
+  uppunch2     : (43,10,50,91)
+  uppunch3     : None
+  upkick1      : None
+  upkick2      : None
+  upkick3      :(6,28,84,110)
+  downpunch1
+  downpunch2
+  downkick1
+  downkick2
+ 
+ 
+ Ken
+  punch1       : None
   punch2       :(10,10,20,5)
   kick1
   kick2
@@ -13,4 +30,3 @@ Ryu
   downpunch2
   downkick1
   downkick2
- ken ^again
