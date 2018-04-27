@@ -3,6 +3,7 @@ import sys
 import players
 import player_group
 import name_sprites
+import re
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -12,7 +13,9 @@ screen = pygame.display.set_mode(win_size, 0, 32)
 pygame.display.set_caption("Freet Strighter")
 color_red = (217,47,10)
 color_white = (255,255,255)
-
+colliding = False
+ryu_hitbox_cord = (0,0)
+ken_hitbox_cord = (0,0)
 
 
 screen.blit(pygame.image.load(background), (0, 0))  # loading background
@@ -51,7 +54,8 @@ while running:
             elif evt.key == pygame.K_s:
                 keys['s'] = True
             elif evt.key == pygame.K_d:
-                keys['d'] = True
+                if not colliding:
+                    keys['d'] = True
                 player_two.jump_dir = 'right'
             elif evt.key == pygame.K_w:
                 keys['w'] = True
@@ -62,7 +66,8 @@ while running:
             elif evt.key == pygame.K_p:
                 player_group.move('p')
             elif evt.key == pygame.K_LEFT:
-                keys['left'] = True
+                if not colliding:
+                    keys['left'] = True
                 player_one.jump_dir = 'left'
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = True
@@ -112,16 +117,61 @@ while running:
                 keys['0'] = False
 
     #Start MASK SECTION
-    #SPRITES.COLLIDE_MASK()
+    frame_hurtbox_Ryu = {
+        'punch1':      (1, 0, 4, 5),
+        'punch2':      (0, 0, 0, 0),
+        'kick1':       (0, 0, 0, 0),
+        'kick2':       (0, 0, 0, 0),
+        'uppunch1':    (0, 0, 0, 0),
+        'uppunch2':    (0, 0, 0, 0),
+        'uppunch3':    (0, 0, 0, 0),
+        'upkick1':     (0, 0, 0, 0),
+        'upkick2':     (0, 0, 0, 0),
+        'upkick3':     (0, 0, 0, 0),
+        'downpunch1':  (0, 0, 0, 0),
+        'downpunch2':  (0, 0, 0, 0),
+        'downkick1':   (0, 0, 0, 0),
+        'downkick2':   (0, 0, 0, 0),
+    }
+    frame_hurtbox_ken = {
+        'punch1':     (0, 0, 0, 0),
+        'punch2':     (0, 0, 0, 0),
+        'kick1':      (0, 0, 0, 0),
+        'kick2':      (0, 0, 0, 0),
+        'uppunch1':   (0, 0, 0, 0),
+        'uppunch2':   (0, 0, 0, 0),
+        'uppunch3':   (0, 0, 0, 0),
+        'upkick1':    (0, 0, 0, 0),
+        'upkick2':    (0, 0, 0, 0),
+        'upkick3':    (0, 0, 0, 0),
+        'downpunch1': (0, 0, 0, 0),
+        'downpunch2': (0, 0, 0, 0),
+        'downkick1':  (0, 0, 0, 0),
+        'downkick2':  (0, 0, 0, 0),
+    }
+    #SPRITES.COLLIDE_MASK() R-hitsprite and k-player
+    colliding = False if pygame.sprite.collide_mask(player_one,player_two) is None else True
+    #make a collide variable in plar set it here
+    player_two.is_colliding = colliding
+    player_one.is_colliding = colliding
+    if player_one.image_name in frame_hurtbox_Ryu:
+        ryu_hitbox = pygame.Surface((frame_hurtbox_Ryu[player_one.image_name][2],frame_hurtbox_Ryu[player_one.image_name][3]))
+        ryu_hitbox.fill(color_red)
+        ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0],frame_hurtbox_Ryu[player_one.image_name][1])
+    if player_two.image_name in frame_hurtbox_ken:
+        ken_hitbox = pygame.Surface((frame_hurtbox_ken[player_two.image_name][2],frame_hurtbox_ken[player_two.image_name][3]))
+        ken_hitbox.fill(color_red)
+        ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0],frame_hurtbox_ken[player_two.image_name][1])
+
     #End MASK SECTION
+
+
     for pressed in keys:
         if keys[pressed]:
             player_group.move(pressed)
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
     name_group.draw(screen)
-
-
 
     for player in player_group.sprites():
         pygame.draw.rect(screen, color_white, (23, 23, 503, 28), 2)
