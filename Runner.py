@@ -153,7 +153,7 @@ while running:
     #make a collide variable in plar set it here
     player_two.is_colliding = colliding
     player_one.is_colliding = colliding
-    if player_one.image_name in frame_hurtbox_Ryu:
+    if player_one.image_name in frame_hurtbox_Ryu and frame_hurtbox_Ryu(player_one.image_name) is not None:
         ryu_hitbox = pygame.Surface((frame_hurtbox_Ryu[player_one.image_name][2],frame_hurtbox_Ryu[player_one.image_name][3]))
         ryu_hitbox.fill(color_red)
         ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0],frame_hurtbox_Ryu[player_one.image_name][1])
@@ -161,7 +161,7 @@ while running:
     else:
         ryu_hitbox = None
         ryu_hitbox_cord = None
-    if player_two.image_name in frame_hurtbox_ken:
+    if player_two.image_name in frame_hurtbox_ken and frame_hurtbox_ken(player_two.image_name) is not None:
         ken_hitbox = pygame.Surface((frame_hurtbox_ken[player_two.image_name][2],frame_hurtbox_ken[player_two.image_name][3]))
         ken_hitbox.fill(color_red)
         ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0],frame_hurtbox_ken[player_two.image_name][1])
