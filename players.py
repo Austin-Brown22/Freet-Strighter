@@ -27,6 +27,7 @@ class Players(pygame.sprite.Sprite):
         self.up_atck = False
         self.is_colliding = False
 
+
     def update(self, action, num):
         self.is_updating = True
         temp_x = self.rect.x
