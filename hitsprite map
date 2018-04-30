@@ -1,0 +1,36 @@
+Ryu
+  punch1       : None
+  punch2       : (8,79,71,28)
+  kick1        : None
+  kick2        : (8,127,63,75) 
+  uppunch1     : None
+  uppunch2     : (43,10,50,91)
+  uppunch3     : None
+  upkick1      : None
+  upkick2      : None
+  upkick3      :(6,28,84,110)
+  downpunch1   : None
+  downpunch2   :(32,150,63,28)
+  downkick1    : None
+  downkick2    :(5,211,82,44)
+  jumppunch1   :(53,132,53,55)
+  jumpkick1    :(34,171,81,52)
+ 
+ 
+ Ken
+  punch1       : None
+  punch2       : (122,81,67,31)
+  kick1        : None
+  kick2        : (131,122,67,77) 
+  uppunch1     : None
+  uppunch2     : (116,4,50,92)
+  uppunch3     : None
+  upkick1      : None
+  upkick2      : None
+  upkick3      :(121,37,68,103)
+  downpunch1   : None
+  downpunch2   :(109,139,63,29)
+  downkick1    : None
+  downkick2    :(117,213,82,44)
+  jumppunch1   :(77,158,55,54)
+  jumpkick1    :(82,215,61,42)
