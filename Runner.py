@@ -3,7 +3,6 @@ import sys
 import players
 import player_group
 import name_sprites
-import re
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -118,8 +117,8 @@ while running:
 
     #Start MASK SECTION
     frame_hurtbox_Ryu = {
-        'punch1':      (1, 0, 4, 5),
-        'punch2':      (0, 0, 0, 0),
+        'punch1':      (2, 0, 4, 5),
+        'punch2':      (1, 0, 0, 0),
         'kick1':       (0, 0, 0, 0),
         'kick2':       (0, 0, 0, 0),
         'uppunch1':    (0, 0, 0, 0),
@@ -158,10 +157,23 @@ while running:
         ryu_hitbox = pygame.Surface((frame_hurtbox_Ryu[player_one.image_name][2],frame_hurtbox_Ryu[player_one.image_name][3]))
         ryu_hitbox.fill(color_red)
         ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0],frame_hurtbox_Ryu[player_one.image_name][1])
+        print(ryu_hitbox_cord)
+    else:
+        ryu_hitbox = None
+        ryu_hitbox_cord = None
     if player_two.image_name in frame_hurtbox_ken:
         ken_hitbox = pygame.Surface((frame_hurtbox_ken[player_two.image_name][2],frame_hurtbox_ken[player_two.image_name][3]))
         ken_hitbox.fill(color_red)
         ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0],frame_hurtbox_ken[player_two.image_name][1])
+    else:
+        ken_hitbox = None
+        ken_hitbox_cord = None
+    #check actual collisions of hitbox masks
+    if ken_hitbox is not None:
+        ken_mask = pygame.mask.from_surface(ken_hitbox)
+    if ryu_hitbox is not None:
+        ryu_mask = pygame.mask.from_surface(ryu_hitbox)
+    #parry
 
     #End MASK SECTION
 
