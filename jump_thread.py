@@ -7,7 +7,7 @@ class Jump_Thread(threading.Thread):
         threading.Thread.__init__(self, target=self.run)
         self.player = pler
         self.direction = direction
-        self.delay = .05
+        self.delay = .04
         self.height = 110
         self.refreshes = 10
         self.y_incrament = self.height/self.refreshes
@@ -25,22 +25,30 @@ class Jump_Thread(threading.Thread):
             for i in range(self.refreshes):
                 while self.player.is_updating:
                     time.sleep(.005)
-                self.player.rect.x += self.x_incrament
+                if not self.player.is_colliding:
+                    self.player.rect.x += self.x_incrament
                 self.player.rect.y -= self.y_incrament
                 time.sleep(self.delay)
             for i in range(self.refreshes):
                 while self.player.is_updating:
                     time.sleep(.005)
-                self.player.rect.x += self.x_incrament
+                if not self.player.is_colliding:
+                    self.player.rect.x += self.x_incrament
                 self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
         else:
             for i in range(self.refreshes):
-                self.player.rect.x -= self.x_incrament
+                while self.player.is_updating:
+                    time.sleep(.005)
+                if not self.player.is_colliding:
+                    self.player.rect.x -= self.x_incrament
                 self.player.rect.y -= self.y_incrament
                 time.sleep(self.delay)
             for i in range(self.refreshes):
-                self.player.rect.x -= self.x_incrament
+                while self.player.is_updating:
+                    time.sleep(.005)
+                if not self.player.is_colliding:
+                    self.player.rect.x -= self.x_incrament
                 self.player.rect.y += self.y_incrament
                 time.sleep(self.delay)
         self.player.in_jump = False

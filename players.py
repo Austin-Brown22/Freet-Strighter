@@ -8,8 +8,8 @@ class Players(pygame.sprite.Sprite):
     def __init__(self, xinit, yintit, speed, nam, number):
         pygame.sprite.Sprite.__init__(self)
         self.name = nam
-        self.image_name = str(self.name) + ' Sprites\\' + str(self.name) + '_idle1.png'
-        self.image = pygame.image.load(self.image_name)
+        self.image_name = 'idle1'
+        self.image = pygame.image.load(str(self.name) + ' Sprites\\' + str(self.name) + '_idle1.png')
         self.rect = self.image.get_rect()
         self.rect.x = xinit
         self.rect.y = yintit
@@ -25,12 +25,14 @@ class Players(pygame.sprite.Sprite):
         self.is_updating = False
         self.jump_dir = 'None'
         self.up_atck = False
+        self.is_colliding = False
 
 
     def update(self, action, num):
         self.is_updating = True
         temp_x = self.rect.x
         temp_y = self.rect.y
+        self.image_name = action+str(num)
         self.image = pygame.image.load(self.name + ' Sprites\\' + self.name + '_'+action+str(num)+'.png')
         self.rect.x = temp_x
         self.rect.y = temp_y
@@ -59,8 +61,7 @@ class Players(pygame.sprite.Sprite):
 
     # go through jump animation and du de stuph
     def jump(self):
-
-        self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .5))
+        self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jump', self, 2, .4))
         self.threads[-1].start()
         self.threads.append(jump_thread.Jump_Thread(self,'right'))
         self.threads[-1].start()
@@ -71,7 +72,7 @@ class Players(pygame.sprite.Sprite):
     def move(self, direction):
         if self.name == 'ken':
             if direction == 'd':
-                if not (self.in_animation or self.is_crouched):
+                if (not (self.in_animation or self.is_crouched)) and not self.is_colliding:
                     self.rect.x += self.vel
             elif direction == 'a':
                 if not (self.in_animation or self.is_crouched):
@@ -116,7 +117,7 @@ class Players(pygame.sprite.Sprite):
                 if not (self.in_animation or self.is_crouched):
                     self.rect.x += self.vel
             elif direction == 'left':
-                if not (self.in_animation or self.is_crouched):
+                if (not (self.in_animation or self.is_crouched)) and not self.is_colliding:
                     self.rect.x -= self.vel
             elif direction == 'down':
                 self.crouch()
