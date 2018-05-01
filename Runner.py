@@ -153,27 +153,36 @@ while running:
     #make a collide variable in plar set it here
     player_two.is_colliding = colliding
     player_one.is_colliding = colliding
-    if player_one.image_name in frame_hurtbox_Ryu and frame_hurtbox_Ryu(player_one.image_name) is not None:
+    if player_one.image_name in frame_hurtbox_Ryu and frame_hurtbox_Ryu[player_one.image_name] is not None:
         ryu_hitbox = pygame.Surface((frame_hurtbox_Ryu[player_one.image_name][2],frame_hurtbox_Ryu[player_one.image_name][3]))
         ryu_hitbox.fill(color_red)
-        ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0],frame_hurtbox_Ryu[player_one.image_name][1])
-        print(ryu_hitbox_cord)
+        ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0] + player_one.rect.x, frame_hurtbox_Ryu[player_one.image_name][1] + player_one.rect.y)
     else:
         ryu_hitbox = None
         ryu_hitbox_cord = None
-    if player_two.image_name in frame_hurtbox_ken and frame_hurtbox_ken(player_two.image_name) is not None:
+    if player_two.image_name in frame_hurtbox_ken and frame_hurtbox_ken[player_two.image_name] is not None:
         ken_hitbox = pygame.Surface((frame_hurtbox_ken[player_two.image_name][2],frame_hurtbox_ken[player_two.image_name][3]))
         ken_hitbox.fill(color_red)
-        ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0],frame_hurtbox_ken[player_two.image_name][1])
+        ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0] + player_two.rect.x, frame_hurtbox_ken[player_two.image_name][1] + player_two.rect.y)
     else:
         ken_hitbox = None
         ken_hitbox_cord = None
     #check actual collisions of hitbox masks
     if ken_hitbox is not None:
         ken_mask = pygame.mask.from_surface(ken_hitbox)
+    else:
+        ken_mask = None
     if ryu_hitbox is not None:
         ryu_mask = pygame.mask.from_surface(ryu_hitbox)
+    else:
+        ryu_mask = None
     #parry
+    if ken_mask is not None:
+        print(str(ken_mask.get_size())+'ken')
+    if ken_mask is not None and ryu_mask is not None and ken_mask.overlap(ryu_mask,(player_one.rect.x-player_two.rect.x,player_one.rect.y-player_two.rect.y)) is not None:
+        # a parry has happened
+        print('get fuggin perryied')
+    #check for contact to sprite
 
     #End MASK SECTION
 
