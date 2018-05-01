@@ -32,7 +32,7 @@ class Players(pygame.sprite.Sprite):
         self.is_updating = True
         temp_x = self.rect.x
         temp_y = self.rect.y
-        self.image_name = action+str(num)
+        self.image_name =       action+str(num)
         self.image = pygame.image.load(self.name + ' Sprites\\' + self.name + '_'+action+str(num)+'.png')
         self.rect.x = temp_x
         self.rect.y = temp_y

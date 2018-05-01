@@ -118,36 +118,35 @@ while running:
 
     #Start MASK SECTION
     frame_hurtbox_Ryu = {
-        'punch1':      (1, 0, 4, 5),
-        'punch2':      (0, 0, 0, 0),
-        'kick1':       (0, 0, 0, 0),
-        'kick2':       (0, 0, 0, 0),
-        'uppunch1':    (0, 0, 0, 0),
-        'uppunch2':    (0, 0, 0, 0),
-        'uppunch3':    (0, 0, 0, 0),
-        'upkick1':     (0, 0, 0, 0),
-        'upkick2':     (0, 0, 0, 0),
-        'upkick3':     (0, 0, 0, 0),
-        'downpunch1':  (0, 0, 0, 0),
-        'downpunch2':  (0, 0, 0, 0),
-        'downkick1':   (0, 0, 0, 0),
-        'downkick2':   (0, 0, 0, 0),
+        'punch2':      (8,79,71,28),
+
+        'kick2':       (8,127,63,75),
+
+        'uppunch2':    (43,10,50,91),
+
+        'upkick3':     (6,28,84,110),
+
+        'downpunch2':  (32,150,63,28),
+
+        'downkick2':   (5,211,82,44),
+        'jumppunch1':  (53, 132, 53, 55),
+        'jumpkick1':   (34, 171, 81, 52),
     }
     frame_hurtbox_ken = {
-        'punch1':     (0, 0, 0, 0),
-        'punch2':     (0, 0, 0, 0),
-        'kick1':      (0, 0, 0, 0),
-        'kick2':      (0, 0, 0, 0),
-        'uppunch1':   (0, 0, 0, 0),
-        'uppunch2':   (0, 0, 0, 0),
-        'uppunch3':   (0, 0, 0, 0),
-        'upkick1':    (0, 0, 0, 0),
-        'upkick2':    (0, 0, 0, 0),
-        'upkick3':    (0, 0, 0, 0),
-        'downpunch1': (0, 0, 0, 0),
-        'downpunch2': (0, 0, 0, 0),
-        'downkick1':  (0, 0, 0, 0),
-        'downkick2':  (0, 0, 0, 0),
+
+        'punch2':      (122,81,67,31),
+
+        'kick2':       (131,122,67,77),
+
+        'uppunch2':    (116,4,50,92),
+
+        'upkick3':     (121,37,68,103),
+
+        'downpunch2':  (109,139,63,29),
+
+        'downkick2':   (117,213,82,44),
+        'jumppunch1':  (77,158,55,54),
+        'jumpkick1':   (82,215,61,42),
     }
     #SPRITES.COLLIDE_MASK() R-hitsprite and k-player
     colliding = False if pygame.sprite.collide_mask(player_one,player_two) is None else True
