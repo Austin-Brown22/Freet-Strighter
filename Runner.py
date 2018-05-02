@@ -174,9 +174,19 @@ while running:
     if ken_mask is not None:
         if ken_mask.overlap(ryu_urt_box, (player_one.rect.x - ken_hitbox_cord[0], player_one.rect.y - ken_hitbox_cord[1])) is not None:
             print('ken lands a hit')
+            player_two.cur_health -= .5
+            print(percur1)
+            percur1 = player_one.cur_health * 100 / player_one.max_health
+            percur2 = player_two.cur_health * 100 / player_two.max_health
+
     if ryu_mask is not None:
         if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
             print('ryu lands a hit')
+            player_one.cur_health -= .5
+            print(percur2)
+            percur1 = player_one.cur_health * 100 / player_one.max_health
+            percur2 = player_two.cur_health * 100 / player_two.max_health
+
     #End MASK SECTION
 
 
