@@ -117,36 +117,24 @@ while running:
 
     #Start MASK SECTION
     frame_hurtbox_Ryu = {
-        'punch1':      (2, 0, 4, 5),
-        'punch2':      (1, 0, 0, 0),
-        'kick1':       (0, 0, 0, 0),
-        'kick2':       (0, 0, 0, 0),
-        'uppunch1':    (0, 0, 0, 0),
-        'uppunch2':    (0, 0, 0, 0),
-        'uppunch3':    (0, 0, 0, 0),
-        'upkick1':     (0, 0, 0, 0),
-        'upkick2':     (0, 0, 0, 0),
-        'upkick3':     (0, 0, 0, 0),
-        'downpunch1':  (0, 0, 0, 0),
-        'downpunch2':  (0, 0, 0, 0),
-        'downkick1':   (0, 0, 0, 0),
-        'downkick2':   (0, 0, 0, 0),
+        'punch2':      (8,79,71,28),
+        'kick2':       (8,127,63,75),
+        'uppunch2':    (43,10,50,91),
+        'upkick3':     (6,28,84,110),
+        'downpunch2':  (32,150,63,28),
+        'downkick2':   (5,211,82,44),
+        'jumppunch1':  (53, 132, 53, 55),
+        'jumpkick1':   (34, 171, 81, 52),
     }
     frame_hurtbox_ken = {
-        'punch1':     (0, 0, 0, 0),
-        'punch2':     (0, 0, 0, 0),
-        'kick1':      (0, 0, 0, 0),
-        'kick2':      (0, 0, 0, 0),
-        'uppunch1':   (0, 0, 0, 0),
-        'uppunch2':   (0, 0, 0, 0),
-        'uppunch3':   (0, 0, 0, 0),
-        'upkick1':    (0, 0, 0, 0),
-        'upkick2':    (0, 0, 0, 0),
-        'upkick3':    (0, 0, 0, 0),
-        'downpunch1': (0, 0, 0, 0),
-        'downpunch2': (0, 0, 0, 0),
-        'downkick1':  (0, 0, 0, 0),
-        'downkick2':  (0, 0, 0, 0),
+        'punch2':      (122,81,67,31),
+        'kick2':       (131,122,67,77),
+        'uppunch2':    (116,4,50,92),
+        'upkick3':     (121,37,68,103),
+        'downpunch2':  (109,139,63,29),
+        'downkick2':   (117,213,82,44),
+        'jumppunch1':  (77,158,55,54),
+        'jumpkick1':   (82,215,61,42),
     }
     #SPRITES.COLLIDE_MASK() R-hitsprite and k-player
     colliding = False if pygame.sprite.collide_mask(player_one,player_two) is None else True
@@ -155,14 +143,12 @@ while running:
     player_one.is_colliding = colliding
     if player_one.image_name in frame_hurtbox_Ryu and frame_hurtbox_Ryu[player_one.image_name] is not None:
         ryu_hitbox = pygame.Surface((frame_hurtbox_Ryu[player_one.image_name][2],frame_hurtbox_Ryu[player_one.image_name][3]))
-        ryu_hitbox.fill(color_red)
         ryu_hitbox_cord = (frame_hurtbox_Ryu[player_one.image_name][0] + player_one.rect.x, frame_hurtbox_Ryu[player_one.image_name][1] + player_one.rect.y)
     else:
         ryu_hitbox = None
         ryu_hitbox_cord = None
     if player_two.image_name in frame_hurtbox_ken and frame_hurtbox_ken[player_two.image_name] is not None:
         ken_hitbox = pygame.Surface((frame_hurtbox_ken[player_two.image_name][2],frame_hurtbox_ken[player_two.image_name][3]))
-        ken_hitbox.fill(color_red)
         ken_hitbox_cord = (frame_hurtbox_ken[player_two.image_name][0] + player_two.rect.x, frame_hurtbox_ken[player_two.image_name][1] + player_two.rect.y)
     else:
         ken_hitbox = None
@@ -170,20 +156,27 @@ while running:
     #check actual collisions of hitbox masks
     if ken_hitbox is not None:
         ken_mask = pygame.mask.from_surface(ken_hitbox)
+        ken_mask.fill()
     else:
         ken_mask = None
     if ryu_hitbox is not None:
         ryu_mask = pygame.mask.from_surface(ryu_hitbox)
+        ryu_mask.fill()
     else:
         ryu_mask = None
     #parry
-    if ken_mask is not None:
-        print(str(ken_mask.get_size())+'ken')
-    if ken_mask is not None and ryu_mask is not None and ken_mask.overlap(ryu_mask,(player_one.rect.x-player_two.rect.x,player_one.rect.y-player_two.rect.y)) is not None:
+    if (ken_mask is not None) and (ryu_mask is not None) and (ken_mask.overlap(ryu_mask,(ryu_hitbox_cord[0]-ken_hitbox_cord[0],ryu_hitbox_cord[1]-ken_hitbox_cord[1])) is not None):
         # a parry has happened
         print('get fuggin perryied')
     #check for contact to sprite
-
+    ken_urt_box = pygame.mask.from_surface(player_two.image)
+    ryu_urt_box = pygame.mask.from_surface(player_one.image)
+    if ken_mask is not None:
+        if ken_mask.overlap(ryu_urt_box, (player_one.rect.x - ken_hitbox_cord[0], player_one.rect.y - ken_hitbox_cord[1])) is not None:
+            print('ken lands a hit')
+    if ryu_mask is not None:
+        if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
+            print('ryu lands a hit')
     #End MASK SECTION
 
 
@@ -193,6 +186,13 @@ while running:
     screen.blit(pygame.image.load(background), (0, 0))
     player_group.draw(screen)
     name_group.draw(screen)
+    if ken_hitbox_cord is not None:
+        mask_size = ken_mask.get_size()
+        pygame.draw.rect(screen, color_red, (ken_hitbox_cord[0], ken_hitbox_cord[1], mask_size[0], mask_size[1]))
+
+    if ryu_hitbox_cord is not None:
+        mask_size = ryu_mask.get_size()
+        pygame.draw.rect(screen, color_red, (ryu_hitbox_cord[0], ryu_hitbox_cord[1], mask_size[0], mask_size[1]))
 
     for player in player_group.sprites():
         pygame.draw.rect(screen, color_white, (23, 23, 503, 28), 2)
