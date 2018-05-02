@@ -3,6 +3,8 @@ import sys
 import players
 import player_group
 import name_sprites
+import thread_moving_sprites
+import thread_animations
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -15,6 +17,7 @@ color_white = (255,255,255)
 colliding = False
 ryu_hitbox_cord = (0,0)
 ken_hitbox_cord = (0,0)
+has_perried = False
 
 
 screen.blit(pygame.image.load(background), (0, 0))  # loading background
@@ -167,11 +170,16 @@ while running:
     #parry
     if (ken_mask is not None) and (ryu_mask is not None) and (ken_mask.overlap(ryu_mask,(ryu_hitbox_cord[0]-ken_hitbox_cord[0],ryu_hitbox_cord[1]-ken_hitbox_cord[1])) is not None):
         # a parry has happened
+        # do hurt animation for both
+        # no damage
+        has_perried = True
         print('get fuggin perryied')
+    else:
+        has_perried = False
     #check for contact to sprite
     ken_urt_box = pygame.mask.from_surface(player_two.image)
     ryu_urt_box = pygame.mask.from_surface(player_one.image)
-    if ken_mask is not None:
+    if not has_perried and ken_mask is not None:
         if ken_mask.overlap(ryu_urt_box, (player_one.rect.x - ken_hitbox_cord[0], player_one.rect.y - ken_hitbox_cord[1])) is not None:
             print('ken lands a hit')
             player_two.cur_health -= .5
