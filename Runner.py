@@ -184,13 +184,18 @@ while running:
             print('ken lands a hit')
             # do hurt animation for person hit
             #   do animation and move them back some to avoid spam
-            ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', )
+            ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
+            ryu_hurt_animation.start()
+            ryu_hit_slide =  thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 80, 0, 1, player_one,)
+            ryu_hit_slide.start()
             # damage one
             player_one.cur_health -= 10
     if not has_perried and ryu_mask is not None:
         if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
             print('ryu lands a hit')
             # do hurt animation
+            ken_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_two, 1, .25)
+            ken_hurt_animation.start()
             # damage one
             player_two.cur_health -= 10
     #End MASK SECTION
