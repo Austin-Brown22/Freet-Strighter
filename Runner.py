@@ -5,6 +5,7 @@ import player_group
 import name_sprites
 import thread_moving_sprites
 import thread_animations
+import re
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -173,6 +174,17 @@ while running:
         # do hurt animation for both
         # no damage
         has_perried = True
+        for frame in player_one.threads:
+            #if  in frame.name:
+            pass
+        ryu_hurt_animationP = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
+        ryu_hurt_animationP.start()
+        ryu_hit_slideP = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one)
+        ryu_hit_slideP.start()
+        ken_hurt_animationP = thread_animations.Thread_Animations('ken_hurt_thread', 'hit', player_two, 1, .25)
+        ken_hurt_animationP.start()
+        ken_hit_slideP = thread_moving_sprites.thread_Moving_Sprites('ken_slide_thread', -30, 0, 1, player_two)
+        ken_hit_slideP.start()
         print('get fuggin perryied')
     else:
         has_perried = False
@@ -184,7 +196,6 @@ while running:
             print('ken lands a hit')
             # do hurt animation for person hit
             #   do animation and move them back some to avoid spam
-            ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', )
             # damage one
             player_two.cur_health -= .5
             print(percur2)
@@ -192,7 +203,7 @@ while running:
             percur2 = player_two.cur_health * 100 / player_two.max_health
             ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
             ryu_hurt_animation.start()
-            ryu_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one, )
+            ryu_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one)
             ryu_hit_slide.start()
     if not has_perried and ryu_mask is not None and not player_two.image_name == 'hit1':
         if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
@@ -203,8 +214,10 @@ while running:
             print(percur1)
             percur1 = player_one.cur_health * 100 / player_one.max_health
             percur2 = player_two.cur_health * 100 / player_two.max_health
-            ken_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_two, 1, .25)
+            ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'hit', player_two, 1, .25)
             ken_hurt_animation.start()
+            ken_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ken_slide_thread', -30, 0, 1, player_two)
+            ken_hit_slide.start()
     #End MASK SECTION
 
 
