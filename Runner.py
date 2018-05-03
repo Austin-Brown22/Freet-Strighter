@@ -186,7 +186,7 @@ while running:
             #   do animation and move them back some to avoid spam
             ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
             ryu_hurt_animation.start()
-            ryu_hit_slide =  thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 80, 0, 1, player_one,)
+            ryu_hit_slide =  thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one,)
             ryu_hit_slide.start()
             # damage one
             player_one.cur_health -= 10
