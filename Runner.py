@@ -175,8 +175,13 @@ while running:
         # no damage
         has_perried = True
         for frame in player_one.threads:
-            #if  in frame.name:
-            pass
+            print('loops')
+            if re.search('.*(punch|kick).*',frame.name):
+                print('canceling')
+                frame.cancel = True
+        for frame in player_two.threads:
+            if re.search('.*(punch|kick).*',frame.name):
+                frame.cancel = True
         ryu_hurt_animationP = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
         ryu_hurt_animationP.start()
         ryu_hit_slideP = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one)
