@@ -179,25 +179,32 @@ while running:
     #check for contact to sprite
     ken_urt_box = pygame.mask.from_surface(player_two.image)
     ryu_urt_box = pygame.mask.from_surface(player_one.image)
-    if not has_perried and ken_mask is not None:
+    if not has_perried and ken_mask is not None and not player_one.image_name == 'hit1':
         if ken_mask.overlap(ryu_urt_box, (player_one.rect.x - ken_hitbox_cord[0], player_one.rect.y - ken_hitbox_cord[1])) is not None:
             print('ken lands a hit')
             # do hurt animation for person hit
             #   do animation and move them back some to avoid spam
+            ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', )
+            # damage one
+            player_two.cur_health -= .5
+            print(percur2)
+            percur1 = player_one.cur_health * 100 / player_one.max_health
+            percur2 = player_two.cur_health * 100 / player_two.max_health
             ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
             ryu_hurt_animation.start()
-            ryu_hit_slide =  thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one,)
+            ryu_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one, )
             ryu_hit_slide.start()
-            # damage one
-            player_one.cur_health -= 10
-    if not has_perried and ryu_mask is not None:
+    if not has_perried and ryu_mask is not None and not player_two.image_name == 'hit1':
         if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
             print('ryu lands a hit')
             # do hurt animation
+            # damage one
+            player_one.cur_health -= .5
+            print(percur1)
+            percur1 = player_one.cur_health * 100 / player_one.max_health
+            percur2 = player_two.cur_health * 100 / player_two.max_health
             ken_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_two, 1, .25)
             ken_hurt_animation.start()
-            # damage one
-            player_two.cur_health -= 10
     #End MASK SECTION
 
 
