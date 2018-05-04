@@ -26,6 +26,7 @@ class Players(pygame.sprite.Sprite):
         self.jump_dir = 'None'
         self.up_atck = False
         self.is_colliding = False
+        self.shtahp_thread = False
 
 
     def update(self, action, num):

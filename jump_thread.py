@@ -5,6 +5,7 @@ class Jump_Thread(threading.Thread):
 
     def __init__(self, pler,direction):
         threading.Thread.__init__(self, target=self.run)
+        self.action = 'jump'
         self.player = pler
         self.direction = direction
         self.delay = .04
