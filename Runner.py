@@ -175,8 +175,8 @@ while running:
         # no damage
         has_perried = True
         for frame in player_one.threads:
-            print('loops')
-            if re.search('.*(punch|kick).*',frame.name):
+            print(frame.action)
+            if re.search('.*(punch|kick).*',frame.action):
                 print('canceling')
                 frame.cancel = True
         for frame in player_two.threads:
@@ -190,7 +190,6 @@ while running:
         ken_hurt_animationP.start()
         ken_hit_slideP = thread_moving_sprites.thread_Moving_Sprites('ken_slide_thread', -30, 0, 1, player_two)
         ken_hit_slideP.start()
-        print('get fuggin perryied')
     else:
         has_perried = False
     #check for contact to sprite
