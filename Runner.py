@@ -201,7 +201,7 @@ while running:
             # do hurt animation for person hit
             #   do animation and move them back some to avoid spam
             # damage one
-            player_two.cur_health -= .5
+            player_two.cur_health -= 1
             print(percur2)
             percur1 = player_one.cur_health * 100 / player_one.max_health
             percur2 = player_two.cur_health * 100 / player_two.max_health
@@ -214,7 +214,7 @@ while running:
             print('ryu lands a hit')
             # do hurt animation
             # damage one
-            player_one.cur_health -= .5
+            player_one.cur_health -= 1
             print(percur1)
             percur1 = player_one.cur_health * 100 / player_one.max_health
             percur2 = player_two.cur_health * 100 / player_two.max_health
