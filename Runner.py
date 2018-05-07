@@ -177,7 +177,6 @@ while running:
         for frame in player_one.threads + player_two.threads:
             if re.search('.*(punch|kick).*',frame.action):
                 print("canceling")
-                print(player_one.threads + player_two.threads)
                 frame.player.shtahp_thread = True
         ryu_hurt_animationP = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25,hold_time=.2)
         ryu_hurt_animationP.start()

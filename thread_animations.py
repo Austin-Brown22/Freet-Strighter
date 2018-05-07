@@ -15,9 +15,9 @@ class Thread_Animations(threading.Thread):
         self.to_join = joined
         self.hold_time = hold_time
 
-
     def run(self):
         time.sleep(self.hold_time)
+        print('starting' + self.action)
         if not self.to_join == None:
             self.to_join.join()
         self.player.in_animation = True
@@ -31,4 +31,5 @@ class Thread_Animations(threading.Thread):
             self.player.update(self.action, i)
             time.sleep(self.wait_Time)
         self.player.update('idle', 1)
+        print('ending' + self.action)
         self.player.in_animation = False
