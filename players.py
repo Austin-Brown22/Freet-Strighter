@@ -27,6 +27,7 @@ class Players(pygame.sprite.Sprite):
         self.up_atck = False
         self.is_colliding = False
         self.shtahp_thread = False
+        self.block = False
 
 
     def update(self, action, num):
@@ -147,6 +148,11 @@ class Players(pygame.sprite.Sprite):
                     else:
                         self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'punch', self, 2))
                         self.threads[-1].start()
+                elif self.in_jump:
+                    self.shtahp_thread = True
+                    self.threads.append(
+                        thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jumppunch', self, 1,delay=.2,hold_time=.25))
+                    self.threads[-1].start()
             elif direction == '5':
                 if not self.in_animation:
                     if self.is_crouched:
@@ -158,6 +164,11 @@ class Players(pygame.sprite.Sprite):
                     else:
                         self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'kick', self, 2))
                         self.threads[-1].start()
+                elif self.in_jump:
+                    self.shtahp_thread = True
+                    self.threads.append(
+                        thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jumpkick', self, 1,delay=.2,hold_time=.25))
+                    self.threads[-1].start()
             elif direction == '6':
                 if not self.in_animation and not self.is_crouched:
                     self.threads.append(thread_animations.Thread_Animations('thread'+str(len(self.threads)), 'hadouken', self, 4))

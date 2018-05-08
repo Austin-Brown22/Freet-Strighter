@@ -6,6 +6,7 @@ import name_sprites
 import thread_moving_sprites
 import thread_animations
 import re
+import time
 
 
 background = 'stage.jpg'  # the file path of the background image||except it understands if in same folder
@@ -51,10 +52,13 @@ while running:
     for evt in pygame.event.get():
         if evt.type == pygame.QUIT:
             running = False
+        elif done:
+            pass
         elif evt.type == pygame.KEYDOWN:
             if evt.key == pygame.K_a:
                 keys['a'] = True
                 player_two.jump_dir = 'left'
+                player_two.block = True
             elif evt.key == pygame.K_s:
                 keys['s'] = True
             elif evt.key == pygame.K_d:
@@ -76,6 +80,7 @@ while running:
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = True
                 player_one.jump_dir = 'right'
+                player_one.block = True
             elif evt.key == pygame.K_UP:
                 keys['up'] = True
             elif evt.key == pygame.K_DOWN:
@@ -94,6 +99,7 @@ while running:
             if evt.key == pygame.K_a:
                 keys['a'] = False
                 player_two.jump_dir = 'None'
+                player_two.block = False
             elif evt.key == pygame.K_s:
                 keys['s'] = False
                 player_group.move('undown')
@@ -109,6 +115,7 @@ while running:
             elif evt.key == pygame.K_RIGHT:
                 keys['right'] = False
                 player_one.jump_dir = 'None'
+                player_one.block = False
             elif evt.key == pygame.K_UP:
                 keys['up'] = False
                 player_one.up_atck = False
@@ -178,7 +185,6 @@ while running:
             has_perried = True
             for frame in player_one.threads + player_two.threads:
                 if re.search('.*(punch|kick).*',frame.action):
-                    print("canceling")
                     frame.player.shtahp_thread = True
             ryu_hurt_animationP = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25,hold_time=.2)
             ryu_hurt_animationP.start()
@@ -195,31 +201,47 @@ while running:
         ryu_urt_box = pygame.mask.from_surface(player_one.image)
         if not has_perried and ken_mask is not None and not player_one.image_name == 'hit1':
             if ken_mask.overlap(ryu_urt_box, (player_one.rect.x - ken_hitbox_cord[0], player_one.rect.y - ken_hitbox_cord[1])) is not None:
-                print('ken lands a hit')
+                #print('ken lands a hit')
                 # do hurt animation for person hit
                 #   do animation and move them back some to avoid spam
                 # damage one
-                player_two.cur_health -= 1
-                print(percur2)
-                percur1 = player_one.cur_health * 100 / player_one.max_health
-                percur2 = player_two.cur_health * 100 / player_two.max_health
-                ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
-                ryu_hurt_animation.start()
-                ryu_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one)
-                ryu_hit_slide.start()
+                if player_one.block:
+                    if player_one.is_crouched:
+                        ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'crouchblock', player_one,1, .25)
+                        ryu_hurt_animation.start()
+                    else:
+                        ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'block', player_one, 1,.25)
+                        ryu_hurt_animation.start()
+                else:
+                    player_two.cur_health -= 10
+                    percur1 = player_one.cur_health * 100 / player_one.max_health
+                    percur2 = player_two.cur_health * 100 / player_two.max_health
+                    ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
+                    ryu_hurt_animation.start()
+                    ryu_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ryu_slide_thread', 30, 0, 1, player_one)
+                    ryu_hit_slide.start()
         if not has_perried and ryu_mask is not None and not player_two.image_name == 'hit1':
             if ryu_mask.overlap(ken_urt_box, (player_two.rect.x - ryu_hitbox_cord[0], player_two.rect.y - ryu_hitbox_cord[1])) is not None:
-                print('ryu lands a hit')
+                #print('ryu lands a hit')
                 # do hurt animation
-                # damage one
-                player_one.cur_health -= 1
-                print(percur1)
-                percur1 = player_one.cur_health * 100 / player_one.max_health
-                percur2 = player_two.cur_health * 100 / player_two.max_health
-                ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'hit', player_two, 1, .25)
-                ken_hurt_animation.start()
-                ken_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ken_slide_thread', -30, 0, 1, player_two)
-                ken_hit_slide.start()
+                # damage one3
+
+                if player_two.block:
+                    if player_two.is_crouched:
+                        ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'crouchblock', player_two,1, .25)
+                        ken_hurt_animation.start()
+                    else:
+                        ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'block', player_two, 1,.25)
+                        ken_hurt_animation.start()
+                else:
+                    player_one.cur_health -= 10
+                    print(percur1)
+                    percur1 = player_one.cur_health * 100 / player_one.max_health
+                    percur2 = player_two.cur_health * 100 / player_two.max_health
+                    ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'hit', player_two, 1, .25)
+                    ken_hurt_animation.start()
+                    ken_hit_slide = thread_moving_sprites.thread_Moving_Sprites('ken_slide_thread', -30, 0, 1, player_two)
+                    ken_hit_slide.start()
         #End MASK SECTION
 
     if not done:
@@ -243,13 +265,26 @@ while running:
         pygame.draw.rect(screen, color_white, (973, 23, 503, 28), 2)
         pygame.draw.rect(screen, color_red,(25,25,percur1 * 5,25))
         pygame.draw.rect(screen,color_red,(975,25,percur2 * 5,25))
-
-    if player_one.cur_health <= 0 or player_one.cur_health <= 0:
+    if player_one.cur_health <= 0 or player_two.cur_health <= 0:
+        print("winn")
         done = True
-
-
-
+        if player_two.cur_health <= 0:
+            win_thread = thread_animations.Thread_Animations('ken_win_thread', 'win', player_two, 1,end_frame='win',end_num=1,hold_time=.2)
+            win_thread.start()
+            loosethread = thread_animations.Thread_Animations('ryu_lose_thread', 'lose', player_one, 3,
+                                                              end_frame='lose',end_num=3,delay=.4)
+            loosethread.start()
+        else:
+            win_thread = thread_animations.Thread_Animations('ryu_win_thread', 'win', player_one, 1, end_frame='win',
+                                                             end_num=1,hold_time=.2)
+            win_thread.start()
+            loosethread = thread_animations.Thread_Animations('ken_lose_thread', 'lose', player_two, 3,
+                                                              end_frame='lose',end_num=3,delay=.4)
+            loosethread.start()
+        player_one.cur_health = 1
+        player_two.cur_health = 1
 
     pygame.display.update()
 pygame.quit()
-sys.exit()
+sys.exit(0)
+
