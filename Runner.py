@@ -207,13 +207,13 @@ while running:
                 # damage one
                 if player_one.block:
                     if player_one.is_crouched:
-                        ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'crouchblock', player_one,1, .25)
+                        ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'crouchblock', player_one,1, .25,end_frame='crouch')
                         ryu_hurt_animation.start()
                     else:
                         ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'block', player_one, 1,.25)
                         ryu_hurt_animation.start()
                 else:
-                    player_two.cur_health -= 10
+                    player_two.cur_health -= 2
                     percur1 = player_one.cur_health * 100 / player_one.max_health
                     percur2 = player_two.cur_health * 100 / player_two.max_health
                     ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'hit', player_one, 1, .25)
@@ -228,13 +228,13 @@ while running:
 
                 if player_two.block:
                     if player_two.is_crouched:
-                        ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'crouchblock', player_two,1, .25)
+                        ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'crouchblock', player_two,1, .25,end_frame='crouch')
                         ken_hurt_animation.start()
                     else:
                         ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'block', player_two, 1,.25)
                         ken_hurt_animation.start()
                 else:
-                    player_one.cur_health -= 10
+                    player_one.cur_health -= 2
                     print(percur1)
                     percur1 = player_one.cur_health * 100 / player_one.max_health
                     percur2 = player_two.cur_health * 100 / player_two.max_health
