@@ -207,6 +207,7 @@ while running:
                 # damage one
                 if player_one.block:
                     if player_one.is_crouched:
+
                         ryu_hurt_animation = thread_animations.Thread_Animations('ryu_hurt_thread', 'crouchblock', player_one,1, .25,end_frame='crouch')
                         ryu_hurt_animation.start()
                     else:
@@ -235,7 +236,7 @@ while running:
                         ken_hurt_animation.start()
                 else:
                     player_one.cur_health -= 2
-                    print(percur1)
+                    #print(percur1)
                     percur1 = player_one.cur_health * 100 / player_one.max_health
                     percur2 = player_two.cur_health * 100 / player_two.max_health
                     ken_hurt_animation = thread_animations.Thread_Animations('ken_hurt_thread', 'hit', player_two, 1, .25)

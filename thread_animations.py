@@ -26,7 +26,7 @@ class Thread_Animations(threading.Thread):
         for i in range(1, self.length+1):
             #print(self.action)
             if self.player.shtahp_thread:
-                print('exiting')
+                #print('exiting')
                 self.player.shtahp_thread = False
                 self.player.in_animation = False
                 raise SystemExit

@@ -89,7 +89,7 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == 'i':
-                if not self.in_animation:
+                if not self.in_animation and not self.block:
                     if self.is_crouched:
                         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'downpunch', self, 2,end_frame='crouch'))
                         self.threads[-1].start()
@@ -105,7 +105,7 @@ class Players(pygame.sprite.Sprite):
                         thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jumppunch', self, 1,delay=.2,hold_time=.25))
                     self.threads[-1].start()
             elif direction == 'o':
-                if not self.in_animation:
+                if not self.in_animation and not self.block:
                     if self.is_crouched:
                         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'downkick', self, 2,end_frame='crouch'))
                         self.threads[-1].start()
@@ -138,7 +138,7 @@ class Players(pygame.sprite.Sprite):
             elif direction == 'undown':
                 self.uncrouch()
             elif direction == '4':
-                if not self.in_animation:
+                if not self.in_animation and not self.block:
                     if self.is_crouched:
                         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'downpunch', self, 2,end_frame='crouch'))
                         self.threads[-1].start()
@@ -154,7 +154,7 @@ class Players(pygame.sprite.Sprite):
                         thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'jumppunch', self, 1,delay=.2,hold_time=.25))
                     self.threads[-1].start()
             elif direction == '5':
-                if not self.in_animation:
+                if not self.in_animation and not self.block:
                     if self.is_crouched:
                         self.threads.append(thread_animations.Thread_Animations('thread' + str(len(self.threads)), 'downkick', self, 2,end_frame='crouch'))
                         self.threads[-1].start()
